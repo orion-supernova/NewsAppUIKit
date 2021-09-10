@@ -11,11 +11,13 @@ import Foundation
 final class APICaller {
     static let shared = APICaller()
     
-    struct Constants {
-        static let url = URL(string: "https://newsapi.org/v2/everything?q=Apple&from=2021-07-07&sortBy=popularity&apiKey=81cf661cf8f946209469ea9009855b46")
+    enum Constants {
+        static let url = URL(string: "https://newsapi.org/v2/everything?q=Apple&from=2021-09-07&sortBy=popularity&apiKey=81cf661cf8f946209469ea9009855b46")
         static let baseURLString = "https://newsapi.org/v2/everything?"
         static let searchURLStringDefault = "q="
-        static let urlRestBreforeAPI = "&from=2021-07-07&sortBy=popularity"
+        static let urlBeforeDate = "&from="
+        static let urlDate = "2021-09-07"
+        static let urlRestBeforeAPI = "&sortBy=popularity"
         static let apiKeyString = "&apiKey=81cf661cf8f946209469ea9009855b46"
     }
     
@@ -44,7 +46,7 @@ final class APICaller {
     func search(with query: String, completion: @escaping (Result<[Article], Error>) -> Void) {
         
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        let urlString = Constants.baseURLString + Constants.searchURLStringDefault + query + Constants.urlRestBreforeAPI + Constants.apiKeyString
+        let urlString = Constants.baseURLString + Constants.searchURLStringDefault + query + Constants.urlBeforeDate + Constants.urlDate + Constants.urlRestBeforeAPI + Constants.apiKeyString
         
         guard let url = URL(string: urlString) else { return }
         
