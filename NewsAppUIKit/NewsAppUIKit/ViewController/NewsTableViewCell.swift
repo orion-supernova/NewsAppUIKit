@@ -72,7 +72,7 @@ class NewsTableViewCell: UITableViewCell {
         newsImageView.image = nil
     }
     
-    func configure(with viewModel: NewsTableViewCellViewModel) {
+    func configure(with viewModel: NewsTableViewCellModel) {
         newsTitleLabel.text = viewModel.articleTitle
         newsDescriptionLabel.text = viewModel.articleDescription
         

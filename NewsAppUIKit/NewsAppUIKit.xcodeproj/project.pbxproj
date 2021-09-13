@@ -24,6 +24,8 @@
 		5451E76B2697067D00FC23A1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5451E76A2697067D00FC23A1 /* Extensions.swift */; };
 		5451E76D2697333A00FC23A1 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5451E76C2697333A00FC23A1 /* FavoritesTableViewCell.swift */; };
 		5451E76F2697337700FC23A1 /* FavoritesTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5451E76E2697337700FC23A1 /* FavoritesTableViewCellViewModel.swift */; };
+		54C3BCC126EF94A6009F1BE7 /* NewsDetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54C3BCC026EF94A6009F1BE7 /* NewsDetailStoryboard.storyboard */; };
+		54C3BCC326EF94D0009F1BE7 /* NewsDetailViewControllerWithStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C3BCC226EF94D0009F1BE7 /* NewsDetailViewControllerWithStoryboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		5451E76A2697067D00FC23A1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5451E76C2697333A00FC23A1 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		5451E76E2697337700FC23A1 /* FavoritesTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		54C3BCC026EF94A6009F1BE7 /* NewsDetailStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewsDetailStoryboard.storyboard; sourceTree = "<group>"; };
+		54C3BCC226EF94D0009F1BE7 /* NewsDetailViewControllerWithStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewControllerWithStoryboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 			children = (
 				5451E73A2695B85E00FC23A1 /* LaunchScreen.storyboard */,
 				5451E7352695B85D00FC23A1 /* Main.storyboard */,
+				54C3BCC026EF94A6009F1BE7 /* NewsDetailStoryboard.storyboard */,
 			);
 			name = View;
 			path = "Vİew";
@@ -114,6 +119,7 @@
 				5451E7332695B85D00FC23A1 /* NewsViewController.swift */,
 				5451E75E26960A8700FC23A1 /* NewsTableViewCell.swift */,
 				5451E7622696239700FC23A1 /* NewsDetailViewController.swift */,
+				54C3BCC226EF94D0009F1BE7 /* NewsDetailViewControllerWithStoryboard.swift */,
 				5451E7572695F64700FC23A1 /* FavoritesViewController.swift */,
 				5451E76C2697333A00FC23A1 /* FavoritesTableViewCell.swift */,
 			);
@@ -222,6 +228,7 @@
 				5451E73C2695B85E00FC23A1 /* LaunchScreen.storyboard in Resources */,
 				5451E7392695B85E00FC23A1 /* Assets.xcassets in Resources */,
 				5451E7372695B85D00FC23A1 /* Main.storyboard in Resources */,
+				54C3BCC126EF94A6009F1BE7 /* NewsDetailStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +244,7 @@
 				5451E76D2697333A00FC23A1 /* FavoritesTableViewCell.swift in Sources */,
 				5451E7342695B85D00FC23A1 /* NewsViewController.swift in Sources */,
 				5451E769269705FB00FC23A1 /* Helper.swift in Sources */,
+				54C3BCC326EF94D0009F1BE7 /* NewsDetailViewControllerWithStoryboard.swift in Sources */,
 				5451E75F26960A8700FC23A1 /* NewsTableViewCell.swift in Sources */,
 				5451E7302695B85D00FC23A1 /* AppDelegate.swift in Sources */,
 				5451E75D2696066700FC23A1 /* NewsResponse.swift in Sources */,
@@ -401,7 +409,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.orion.NewsAppUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -420,7 +428,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.orion.NewsAppUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

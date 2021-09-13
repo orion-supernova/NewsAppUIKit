@@ -11,21 +11,36 @@ import Foundation
 final class APICaller {
     static let shared = APICaller()
     
+    var lastMonth: String = ""
+    
+    
+    // MARK- Untouched API URL for fetch example "https://newsapi.org/v2/everything?q=Apple&from=2021-09-07&sortBy=popularity&apiKey=81cf661cf8f946209469ea9009855b46"
     enum Constants {
-        static let url = URL(string: "https://newsapi.org/v2/everything?q=Apple&from=2021-09-07&sortBy=popularity&apiKey=81cf661cf8f946209469ea9009855b46")
+        static let defaultUrl = URL(string: defaultUrlBeforeDate + defaultUrlDate + defaultUrlAfterDate)
+        static let defaultUrlBeforeDate = "https://newsapi.org/v2/everything?q=Apple&from="
+        static let defaultUrlDate = "2021-09-07"
+        static let defaultUrlAfterDate = "&sortBy=popularity&apiKey=81cf661cf8f946209469ea9009855b46"
         static let baseURLString = "https://newsapi.org/v2/everything?"
         static let searchURLStringDefault = "q="
-        static let urlBeforeDate = "&from="
-        static let urlDate = "2021-09-07"
-        static let urlRestBeforeAPI = "&sortBy=popularity"
-        static let apiKeyString = "&apiKey=81cf661cf8f946209469ea9009855b46"
+        static let searchUrlBeforeDate = "&from="
+        static let searchUrlDate = "2021-09-07"
+        static let searchUrlRestBeforeAPI = "&sortBy=popularity"
+        static let searchUrlApiKeyString = "&apiKey=81cf661cf8f946209469ea9009855b46"
     }
     
-    private init() {}
-    
+    private init() {
+        getLastMonth()
+    }
+    func getLastMonth() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+        let dateString = formatter.string(from:date ?? Date())
+        self.lastMonth = dateString
+    }
     
     func getNews(completion: @escaping (Result<[Article], Error>) -> Void) {
-        guard let url = Constants.url else { return }
+        guard let url = Constants.defaultUrl else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
@@ -45,8 +60,9 @@ final class APICaller {
     }
     func search(with query: String, completion: @escaping (Result<[Article], Error>) -> Void) {
         
-        guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        let urlString = Constants.baseURLString + Constants.searchURLStringDefault + query + Constants.urlBeforeDate + Constants.urlDate + Constants.urlRestBeforeAPI + Constants.apiKeyString
+        let queryParam = query.replacingOccurrences(of: " ", with: "")
+        
+        let urlString = Constants.baseURLString + Constants.searchURLStringDefault + queryParam + Constants.searchUrlBeforeDate + lastMonth + Constants.searchUrlRestBeforeAPI + Constants.searchUrlApiKeyString
         
         guard let url = URL(string: urlString) else { return }
         

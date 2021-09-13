@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NewsTableViewCellViewModel {
+class NewsTableViewCellModel {
     
     let articleTitle: String
     let articleDescription: String
