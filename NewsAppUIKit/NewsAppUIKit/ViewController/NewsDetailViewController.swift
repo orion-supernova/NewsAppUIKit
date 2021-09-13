@@ -21,6 +21,9 @@ class NewsDetailViewController: UIViewController, ObservableObject {
     var isFavorite = false
     
     
+    @IBOutlet weak var scrollViewFromSB: UIScrollView!
+    @IBOutlet weak var parentViewFromSB: UIView!
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.clipsToBounds = true
@@ -109,7 +112,6 @@ class NewsDetailViewController: UIViewController, ObservableObject {
         scrollView.addSubview(contentLabel)
         scrollView.addSubview(sourceButton)
         
-        
         imageView.kf.setImage(with: ImageResource(downloadURL: URL(string: articleImageURL)!))
         titleLabel.text = articleTitle
         descriptionLabel.text = articleDescription
@@ -143,7 +145,7 @@ class NewsDetailViewController: UIViewController, ObservableObject {
         super.viewDidLayoutSubviews()
         
         scrollView.frame = view.bounds
-        scrollView.contentSize = CGSize(width: view.bounds.size.width, height: view.bounds.size.height + 70 )
+        scrollView.contentSize = CGSize(width: view.bounds.size.width, height: view.bounds.size.height + 70)
         
         
         imageView.frame = CGRect(x: 20,

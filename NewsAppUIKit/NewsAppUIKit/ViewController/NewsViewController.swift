@@ -20,7 +20,7 @@ class NewsViewController: UIViewController {
     
     private let searchVC = UISearchController(searchResultsController: nil)
     
-    private var viewModels = [NewsTableViewCellViewModel]()
+    private var models = [NewsTableViewCellModel]()
     private var articles = [Article]()
     
     var favoriteArticlesData = [Data]()
@@ -61,8 +61,8 @@ class NewsViewController: UIViewController {
             switch result {
             case .success(let articles):
                 self?.articles = articles
-                self?.viewModels = articles.compactMap({
-                    NewsTableViewCellViewModel(articleTitle: $0.title, articleDescription: $0.articleDescription, articleImageURL: URL(string: $0.urlToImage ?? ""), articleAuthor: $0.author, articleDateString: $0.dateString, articleContent: $0.content, isArticleInFavorites: $0.isFavorite)
+                self?.models = articles.compactMap({
+                    NewsTableViewCellModel(articleTitle: $0.title, articleDescription: $0.articleDescription, articleImageURL: URL(string: $0.urlToImage ?? ""), articleAuthor: $0.author, articleDateString: $0.dateString, articleContent: $0.content, isArticleInFavorites: $0.isFavorite)
                 })
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
@@ -79,17 +79,20 @@ class NewsViewController: UIViewController {
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
+        return models.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell else { fatalError() }
-        cell.configure(with: viewModels[indexPath.row])
+        cell.configure(with: models[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+//        guard let detailVC = UIStoryboard(name: "NewsDetailStoryboard", bundle: nil).instantiateViewController(identifier: "detailVC") as? NewsDetailViewControllerWithStoryboard else { return }
+//        self.navigationController?.pushViewController(detailVC, animated: true)
+
         let article = articles[indexPath.row]
         let vc = NewsDetailViewController()
         
@@ -142,8 +145,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource, UISear
             switch result {
             case .success(let articles):
                 self?.articles = articles
-                self?.viewModels = articles.compactMap({
-                    NewsTableViewCellViewModel(articleTitle: $0.title, articleDescription: $0.articleDescription, articleImageURL: URL(string: $0.urlToImage ?? ""), articleAuthor: $0.author, articleDateString: $0.dateString, articleContent: $0.content, isArticleInFavorites: $0.isFavorite)
+                self?.models = articles.compactMap({
+                    NewsTableViewCellModel(articleTitle: $0.title, articleDescription: $0.articleDescription, articleImageURL: URL(string: $0.urlToImage ?? ""), articleAuthor: $0.author, articleDateString: $0.dateString, articleContent: $0.content, isArticleInFavorites: $0.isFavorite)
                 })
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
