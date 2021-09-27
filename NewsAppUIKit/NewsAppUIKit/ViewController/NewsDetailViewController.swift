@@ -18,7 +18,35 @@ class NewsDetailViewController: UIViewController, ObservableObject {
     var articleAuthor: String = ""
     var articleDateString: String = ""
     var articleContent: String = ""
-    var isFavorite = false
+    var isFavorite = false {
+        didSet {
+            if isFavorite {
+                let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
+                                                  target: self,
+                                                  action: #selector(shareButtonClicked))
+                let favoriteButtonFill = UIBarButtonItem(image: UIImage(systemName: "heart.fill"),
+                                                     style: .done,
+                                                     target: self,
+                                                     action: #selector(favoriteButtonClicked))
+                navigationItem.rightBarButtonItems = [favoriteButtonFill, shareButton]
+            } else {
+                let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
+                                                  target: self,
+                                                  action: #selector(shareButtonClicked))
+                let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"),
+                                                     style: .done,
+                                                     target: self,
+                                                     action: #selector(favoriteButtonClicked))
+                navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
+                
+
+            }
+            
+        }
+    }
+    
+    var favoriteHeartEmpty = "heart"
+    var favoriteHeartFill = "heart.fill"
     
     
     @IBOutlet weak var scrollViewFromSB: UIScrollView!
@@ -129,16 +157,7 @@ class NewsDetailViewController: UIViewController, ObservableObject {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
-                                          target: self,
-                                          action: #selector(shareButtonClicked))
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: isFavorite ? "heart.fill" : "heart"),
-                                             style: .done,
-                                             target: self,
-                                             action: #selector(favoriteButtonClicked))
         
-        
-        navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
     }
     
     override func viewDidLayoutSubviews() {
@@ -205,17 +224,11 @@ class NewsDetailViewController: UIViewController, ObservableObject {
             
             favoriteCompletionHandler?(false)
             Helper.app.alertMessage(title: "Removed", message: "This news has been removed from favorites!")
-            navigationItem.rightBarButtonItems?.first?.setBackgroundImage(UIImage(systemName: "heart"),
-                                                                          for: .normal,
-                                                                          barMetrics: .default)
             self.isFavorite = false
         } else {
             
             favoriteCompletionHandler?(true)
             Helper.app.alertMessage(title: "Added", message: "This news has been added to favorites!")
-            navigationItem.rightBarButtonItems?.first?.setBackgroundImage(UIImage(systemName: "heart.fill"),
-                                                                          for: .normal,
-                                                                          barMetrics: .default)
             self.isFavorite = true
         }
     }
